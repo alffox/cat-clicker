@@ -3,25 +3,16 @@ body {
     text-align: center;
 }
 
-.clicks {
-    width: 30px;
-    height: 30px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/*.container div {
-    display:inline-block;
-}*/
-
 .cat-left,
-.cat-left-name {
+.cat-left-name,
+.counter-left {
 float: left;
 width: 50%;
 }
 
 .cat-right,
-.cat-right-name {
+.cat-right-name,
+.counter-right {
 float: right;
 width: 50%;
 }

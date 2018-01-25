@@ -12,19 +12,15 @@
 
     <h1>My Cat Clicker App</h1>
 
+    <h2 class="counter">Clicks Counter<p class="clicks">0</p></h2>
+
     <div class="container">
 
-        <div class="counter-left">0</div>
+        <div class="cat-left-name">cat1</div>
+        <div class="cat-right-name">cat2</div>
 
-        <div class="counter-right">0</div>
-
-        <div class="cat-left-name"></div>
-
-        <div class="cat-right-name"></div>
-
-        <figure><img class="cat-left" src="cat1_960x640.jpg"></figure>
-
-        <figure><img class="cat-right" src="cat2_960x640.jpg"></figure>
+        <figure><img class="cat-picture cat-left" src="cat1_960x640.jpg"></figure>
+        <figure><img class="cat-picture cat-right" src="cat2_960x640.jpg"></figure>
 
     </div>
 

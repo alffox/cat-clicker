@@ -4,12 +4,24 @@ body {
 }
 
 .clicks {
-    border-style: solid;
     width: 30px;
     height: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.cat-picture {
+/*.container div {
+    display:inline-block;
+}*/
+
+.cat-left,
+.cat-left-name {
+float: left;
+width: 50%;
+}
+
+.cat-right,
+.cat-right-name {
+float: right;
+width: 50%;
 }

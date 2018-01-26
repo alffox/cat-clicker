@@ -10,7 +10,7 @@ The goals of this app is raising the awareness of the developer regarding code r
 
 ## How to run the tool ?
 
-Simply open the page, then click on your favorite cat picture.
+Simply open the page https://alffox.github.io/cat-clicker/ , then click on your favorite cat picture.
 
 ## Contributing
 

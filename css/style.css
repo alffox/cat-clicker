@@ -1,9 +1,28 @@
-body {
+h1 {
     margin: 0 auto;
     text-align: center;
 }
 
-.cat-left,
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.cat-sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.cat-dashboard {
+}
+
+/*.cat-icon {
+    width: 100%;
+    height: 25%;
+}*/
+
+/*.cat-left,
 .cat-left-name,
 .counter-left {
 float: left;
@@ -15,4 +34,4 @@ width: 50%;
 .counter-right {
 float: right;
 width: 50%;
-}
+}*/

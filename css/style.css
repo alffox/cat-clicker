@@ -3,10 +3,18 @@
     text-align: center;
 }
 
+img {
+    max-width: 100%
+}
+
 .container {
     display: flex;
     width: 100%;
     flex-direction: row;
+}
+
+.cat-sidebar {
+    width: 20%;
 }
 
 .cat-icon {

@@ -1,25 +1,9 @@
-let clicksLeft = 0;
-let clicksRight = 0;
+var cats = [
+{ name: 'Ashes', image: 'cat1_960x640.jpg', clicks: '0', attribution: 'Photo by <a href="https://unsplash.com/photos/w2DsS-ZAP4U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Mikhail Vasilyev</a>', source: ' via <a href="https://unsplash.com/search/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>' },
+{ name: 'Tiger', image: 'cat2_960x640.jpg', clicks: '0', attribution: 'Photo by <a href="https://unsplash.com/photos/w2DsS-ZAP4U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Paul</a>', source: ' via <a href="https://unsplash.com/search/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>' }
+];
 
-var catNames = ['Ashes','Tiger','Puss','Smokey','Misty','Tigger','Kitty','Oscar','Missy','Max','Ginger'];
 
-$(document).ready(function() {
-
-    function randomEl(list) {
-        var i = Math.floor(Math.random() * list.length);
-        return list[i];
-    }
-
-    $('.cat-left-name').text(randomEl(catNames));
-    $('.cat-right-name').text(randomEl(catNames));
-});
-
-$('.cat-left').click(function() {
-  clicksLeft = clicksLeft +1;
-  $('.counter-left').text(clicksLeft);
-});
-
-$('.cat-right').click(function() {
-  clicksRight = clicksRight +1;
-  $('.counter-right').text(clicksRight);
+cats.forEach(function(cat) {
+  console.log(cat.name + cat.image + cat.clicks + cat.attribution + cat.source);
 });

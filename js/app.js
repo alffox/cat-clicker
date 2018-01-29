@@ -1,6 +1,19 @@
-var cats = [
-{ name: 'Ashes', imageURL: 'cat1_960x640.jpg', clicks: '0', authorName: 'Mikhail Vasilyev', authorHyperlink: '@miklevasilyev', siteName: 'Unsplash', siteHyperlink:'https://unsplash.com/' },
-{ name: 'Tiger', imageURL: 'cat2_960x640.jpg', clicks: '0', authorName: 'Paul', authorHyperlink: '@paul_', siteName: 'Unsplash', siteHyperlink:'https://unsplash.com/' }
+var cats = [{
+        name: 'Ashes',
+        imageURL: 'cat1_960x640.jpg',
+        authorName: 'Mikhail Vasilyev',
+        authorHyperlink: '@miklevasilyev',
+        siteName: 'Unsplash',
+        siteHyperlink: 'https://unsplash.com/'
+    },
+    {
+        name: 'Tiger',
+        imageURL: 'cat2_960x640.jpg',
+        authorName: 'Paul',
+        authorHyperlink: '@paul_',
+        siteName: 'Unsplash',
+        siteHyperlink: 'https://unsplash.com/'
+    }
 ];
 
 cats.forEach(function(cat) {
@@ -10,3 +23,8 @@ cats.forEach(function(cat) {
     $('.cat-icon:last-child').find('.source > a').text(cat.siteName).attr('href', cat.siteHyperlink);
 });
 
+// Solution from https://stackoverflow.com/questions/9572825/each-div-must-increments-its-counter-upon-clicking
+     $('.cat-icon').click( function() {
+        var clicks = $(this).find('.counter');
+        clicks.text( parseInt(clicks.text()) + 1 );
+    });

@@ -4,7 +4,8 @@ var cats = [
 ];
 
 cats.forEach(function(cat) {
-    $('.cat-sidebar').append('<div class="cat-icon"><img><div class="cat-info"><div class="clicks">Clicks: <span class="clicks">0</span></div><div class="attribution"><span class="author">Photo by <a href="https://unsplash.com/"></a></span><span class="source"> via <a href="https://unsplash.com/">Unsplash</a></span></div></div></div>');
+    $('.cat-sidebar').append('<div class="cat-icon"><img><div class="cat-info"><div class="clicks">Clicks: <span class="counter">0</span></div><div class="attribution"><span class="author">Photo by <a href="https://unsplash.com/"></a></span><span class="source"> via <a href="https://unsplash.com/">Unsplash</a></span></div></div></div>');
     $('.cat-icon:last-child > img').attr("src", 'images/'+cat.imageURL);
+
 });
 

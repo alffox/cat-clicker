@@ -61,6 +61,6 @@ $('.cat-icon').click( function(cat) {
     $('.cat-big').attr("src", clickedCatImage).removeClass('hidden');
     $('.hint').addClass('hidden');
 
-    var clickedCatName = $(this).find('.name').text();
-    console.log("name is: " + clickedCatName);
+    var clickedCatInfo = $(this).find('.cat-info');
+    $(clickedCatInfo).clone().appendTo('.cat-dashboard').removeClass('hidden');
 });

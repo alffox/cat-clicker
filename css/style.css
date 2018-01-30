@@ -23,6 +23,17 @@ img {
     flex-direction: column;
 }
 
-.cat-big {
+.cat-dashboard {
     width: 70vW;
 }
+
+.hint {
+    display:inline-block;
+    margin-top: 30%;
+    font-size: 2em;
+    word-wrap: break-word;
+}
+
+/*.hidden {
+    display: none;
+}*/

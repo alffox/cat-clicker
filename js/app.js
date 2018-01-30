@@ -14,6 +14,30 @@ var cats = [
     authorHyperlink: '@paul_',
     siteName: 'Unsplash',
     siteHyperlink: 'https://unsplash.com/'
+},
+{
+    name: 'Lion',
+    imageURL: 'cat3.jpg',
+    authorName: 'Kari Shea',
+    authorHyperlink: '@karishea',
+    siteName: 'Unsplash',
+    siteHyperlink: 'https://unsplash.com/'
+},
+{
+    name: 'Felix',
+    imageURL: 'cat4.jpg',
+    authorName: 'Pacto Visual',
+    authorHyperlink: '@pactovisual',
+    siteName: 'Unsplash',
+    siteHyperlink: 'https://unsplash.com/'
+},
+{
+    name: 'Napoleon',
+    imageURL: 'cat5.jpg',
+    authorName: 'Paul',
+    authorHyperlink: '@paul_',
+    siteName: 'Unsplash',
+    siteHyperlink: 'https://unsplash.com/'
 }
 ];
 

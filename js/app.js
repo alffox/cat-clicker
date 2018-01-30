@@ -57,9 +57,8 @@ $('.cat-icon').click( function(cat) {
     var clicks = $(this).find('.counter');
     clicks.text( parseInt(clicks.text()) + 1 );
 
-    var clickedCat = $(this).find('img').attr('src');
-    $('.cat-big').attr("src", clickedCat).removeClass('hidden');
+    var clickedCatImage = $(this).find('img').attr('src');
+    $('.cat-big').attr("src", clickedCatImage).removeClass('hidden');
     $('.hint').addClass('hidden');
-
 
 });

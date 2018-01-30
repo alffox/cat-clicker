@@ -44,7 +44,6 @@ img {
     word-wrap: break-word;
 }
 
-.hidden,
-.cat-info {
+.hidden {
     display: none;
 }

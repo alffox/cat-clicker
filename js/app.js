@@ -42,7 +42,7 @@ var cats = [
 ];
 
 cats.forEach(function(cat) {
-    $('.cat-sidebar').append('<div class="cat-icon"><img><div class="cat-info"><div class="clicks">Clicks: <span class="counter">0</span></div><div class="name"></div><div class="attribution"><span class="salutation">Photo by </span><span class="author"><a href=""></a></span><span class="source"> via <a href=""></a></span></div></div></div>');
+    $('.cat-sidebar').append('<div class="cat-icon"><img><div class="cat-info hidden"><div class="clicks">Clicks: <span class="counter">0</span></div><div class="name"></div><div class="attribution"><span class="salutation">Photo by </span><span class="author"><a href=""></a></span><span class="source"> via <a href=""></a></span></div></div></div>');
 
     var HTMLSideBarFinder = $('.cat-icon:last-child');
 

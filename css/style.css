@@ -3,8 +3,14 @@
     text-align: center;
 }
 
+h1 {
+    padding: 10px;
+}
+
 img {
-    max-width: 100%
+    max-width: 100%;
+    padding:5px;
+    border:10px solid #021a40;
 }
 
 .container {
@@ -37,6 +43,7 @@ img {
     word-wrap: break-word;
 }
 
-.hidden {
+.hidden,
+.cat-info {
     display: none;
 }

@@ -60,4 +60,5 @@ $('.cat-icon').click( function(cat) {
     var clickedCat = $(this).find('img').attr('src');
     $('.cat-big').attr("src", clickedCat);
     $('.hint').addClass('hidden');
+    $('.cat-big').removeClass('hidden');
 });

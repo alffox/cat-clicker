@@ -44,6 +44,10 @@ img {
     word-wrap: break-word;
 }
 
+.cat-info {
+    font-size: 2em;
+}
+
 .hidden {
     display: none;
 }

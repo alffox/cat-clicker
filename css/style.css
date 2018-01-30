@@ -24,6 +24,9 @@ img {
 }
 
 .cat-dashboard {
+}
+
+.cat-big {
     width: 70vW;
 }
 
@@ -34,6 +37,6 @@ img {
     word-wrap: break-word;
 }
 
-/*.hidden {
+.hidden {
     display: none;
-}*/
+}

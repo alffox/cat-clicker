@@ -61,6 +61,8 @@ $('.cat-icon').click( function(cat) {
     $('.cat-big').attr("src", clickedCatImage).removeClass('hidden');
     $('.hint').addClass('hidden');
 
+    $('.cat-dashboard').find('.cat-info').empty();
+
     var clickedCatInfo = $(this).find('.cat-info');
-    $(clickedCatInfo).clone().appendTo('.cat-dashboard').removeClass('hidden');
+    $(clickedCatInfo).appendTo('.cat-dashboard').removeClass('hidden');
 });

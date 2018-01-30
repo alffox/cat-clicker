@@ -20,7 +20,7 @@ img {
     flex-direction: row;
 }
 
-.cat-sidebar {
+.cat-sidebar { /*TODO: this shall have a vertical scroll bar*/
     width: 20%;
 }
 
@@ -31,7 +31,7 @@ img {
 }
 
 .cat-big {
-    width: 60vW;
+    width: 55vW;
 }
 
 .hint {
@@ -39,10 +39,6 @@ img {
     margin-top: 30%;
     font-size: 1.5em;
     word-wrap: break-word;
-}
-
-.cat-info {
-    font-size: 1.5em;
 }
 
 .hidden {

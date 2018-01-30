@@ -14,6 +14,10 @@ img {
     border-radius: 5%;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     display: flex;
     width: 100%;
@@ -30,9 +34,6 @@ img {
     flex-direction: column;
 }
 
-.cat-dashboard {
-}
-
 .cat-big {
     width: 70vW;
 }
@@ -46,8 +47,4 @@ img {
 
 .cat-info {
     font-size: 2em;
-}
-
-.hidden {
-    display: none;
 }

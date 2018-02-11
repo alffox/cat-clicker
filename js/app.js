@@ -1,68 +1,121 @@
-var cats = [{
-        name: 'Ashes',
-        imageURL: 'cat1_960x640.jpg',
-        authorName: 'Mikhail Vasilyev',
-        authorHyperlink: '@miklevasilyev',
-        siteName: 'Unsplash',
-        siteHyperlink: 'https://unsplash.com/'
+var model = {
+    //TODO: It could be nice to turn this model into an ajax call that fetches data from given site/API
+
+    cats: [{
+            clickCounter: 0,
+            name: 'Ashes',
+            imageURL: 'cat1_960x640.jpg',
+            authorName: 'Mikhail Vasilyev',
+            authorHyperlink: '@miklevasilyev',
+            siteName: 'Unsplash',
+            siteHyperlink: 'https://unsplash.com/'
+        },
+        {
+            clickCounter: 0,
+            name: 'Tiger',
+            imageURL: 'cat2_960x640.jpg',
+            authorName: 'Paul',
+            authorHyperlink: '@paul_',
+            siteName: 'Unsplash',
+            siteHyperlink: 'https://unsplash.com/'
+        },
+        {
+            clickCounter: 0,
+            name: 'Lion',
+            imageURL: 'cat3_960x640.jpg',
+            authorName: 'Kari Shea',
+            authorHyperlink: '@karishea',
+            siteName: 'Unsplash',
+            siteHyperlink: 'https://unsplash.com/'
+        },
+        {
+            clickCounter: 0,
+            name: 'Felix',
+            imageURL: 'cat4_960x640.jpg',
+            authorName: 'Pacto Visual',
+            authorHyperlink: '@pactovisual',
+            siteName: 'Unsplash',
+            siteHyperlink: 'https://unsplash.com/'
+        },
+        {
+            clickCounter: 0,
+            name: 'Napoleon',
+            imageURL: 'cat5_960x640.jpg',
+            authorName: 'Paul',
+            authorHyperlink: '@paul_',
+            siteName: 'Unsplash',
+            siteHyperlink: 'https://unsplash.com/'
+        }
+    ]
+};
+
+
+var octopus = {
+
+    init: function() {
+        view.init();
+
+        //Call this function early to always be ready to listen to clicks
+        octopus.getClickedCatData();
     },
-    {
-        name: 'Tiger',
-        imageURL: 'cat2_960x640.jpg',
-        authorName: 'Paul',
-        authorHyperlink: '@paul_',
-        siteName: 'Unsplash',
-        siteHyperlink: 'https://unsplash.com/'
+
+    getCatNames: function() {
+
+        //Loops on cats object and returns only cat names array
+        return catNames = model.cats.map(a => a.name);
     },
-    {
-        name: 'Lion',
-        imageURL: 'cat3.jpg',
-        authorName: 'Kari Shea',
-        authorHyperlink: '@karishea',
-        siteName: 'Unsplash',
-        siteHyperlink: 'https://unsplash.com/'
+
+    getClickedCatData: function() {
+        $('li').click(function(e) {
+
+            //Assigns index position of clicked cat
+            var clickedCatIndexPos = $(e.target).index();
+
+            //Casts cat index position with model array position
+            var clickedCat = model.cats[clickedCatIndexPos];
+
+            //We want each click to increment click counter in the model
+            octopus.updateClickCounter(clickedCat);
+
+            //Click counter has been updated, now let's render the latest cat data !
+            view.renderClickedCatInfo(clickedCat);
+        });
     },
-    {
-        name: 'Felix',
-        imageURL: 'cat4.jpg',
-        authorName: 'Pacto Visual',
-        authorHyperlink: '@pactovisual',
-        siteName: 'Unsplash',
-        siteHyperlink: 'https://unsplash.com/'
-    },
-    {
-        name: 'Napoleon',
-        imageURL: 'cat5.jpg',
-        authorName: 'Paul',
-        authorHyperlink: '@paul_',
-        siteName: 'Unsplash',
-        siteHyperlink: 'https://unsplash.com/'
+
+    updateClickCounter: function(clickedCat) {
+        return clickedCat.clickCounter++;
     }
-];//TODO this array could be substituted by an ajax functionality
 
-cats.forEach(function(cat) { //populates the DOM (sidebar)
-    $('.cat-sidebar').append('<div class="cat-icon"><img><div class="cat-info hidden"><div class="clicks">Clicks: <span class="counter">0</span></div><div class="name"></div><div class="attribution"><span class="salutation">Photo by </span><span class="author"><a href=""></a></span><span class="source"> via <a href=""></a></span></div></div></div>');
+};
 
-    var HTMLSideBarFinder = $('.cat-icon:last-child');//always attach a different cat when iterating through the cats array
 
-    $('.cat-icon:last-child > img').attr("src", 'images/' + cat.imageURL);
-    $(HTMLSideBarFinder).find('.name').text('Name: ' + cat.name);
-    $(HTMLSideBarFinder).find('.author > a').text(cat.authorName).attr('href', cat.siteHyperlink + cat.authorHyperlink);
-    $(HTMLSideBarFinder).find('.source > a').text(cat.siteName).attr('href', cat.siteHyperlink);
-});
+var view = {
 
-// Solution inspired by https://stackoverflow.com/questions/9572825/each-div-must-increments-its-counter-upon-clicking
-$('.cat-icon').click(function(cat) {
-    var clicks = $(this).find('.counter');
-    clicks.text(parseInt(clicks.text()) + 1);//increments clicks on chosen cat
+    init: function() {
 
-    var clickedCatImage = $(this).find('img').attr('src');
-    $('.hint').addClass('hidden');//hides the hint message until next full page refresh
-    $('.cat-big').attr("src", clickedCatImage).removeClass('hidden');//reveals the chosen cat in the dashboard area
+        // Store pointers to DOM elements for easy access later
+        elemCatList = $('.cat-list');
+        elemCatDashboard = $('.cat-dashboard');
+        view.renderList();
+    },
 
-    $('.cat-dashboard').find('.cat-info').empty(); //clears any cat info previously present
+    renderList: function(names) {
 
-    var clickedCatInfo = $(this).find('.cat-info');//selects copies over and reveals the persisted cat info
-    $(clickedCatInfo).clone().appendTo('.cat-dashboard');
-    $('.cat-dashboard > .cat-info').removeClass('hidden');
-});
+        // On first page load, we want to load only cat names and not full data from the model, this is for scalability and performance reasons. There are high chances that some cats will never be clicked, especially if the list is long
+        octopus.getCatNames();
+
+        //Make a list from cat names
+        for (name = 0; name < catNames.length; name++) {
+            $(elemCatList).append('<li>' + catNames[name] + '</li>');;
+        }
+    },
+
+    renderClickedCatInfo: function(clickedCat) {
+
+        //Append all info related to clicked cat to DOM
+        $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
+    }
+
+};
+// Ignite the app !
+octopus.init();

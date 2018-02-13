@@ -84,6 +84,10 @@ var octopus = {
 
     updateClickCounter: function(clickedCat) {
         return clickedCat.clickCounter++;
+    },
+
+    setClickedCatData: function() {
+
     }
 
 };
@@ -96,6 +100,10 @@ var view = {
         // Store pointers to DOM elements for easy access later
         elemCatList = $('.cat-list');
         elemCatDashboard = $('.cat-dashboard');
+
+        //If no cat is clicked, do not allow showing Admin form
+        $('.admin-button').prop('disabled', true);
+
         view.renderList();
     },
 
@@ -114,6 +122,27 @@ var view = {
 
         //Append all info related to clicked cat to DOM
         $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
+
+            //Now that we have a list, let's enable the Admin button !
+            $('.admin-button').prop('disabled', false);
+
+            view.fillCatForm(clickedCat);
+    },
+
+    fillCatForm: function(clickedCat) {
+
+            //Fill form with values from currently selected cat
+            $("input[name='name']").val(clickedCat.name);
+            $("input[name='imageURL']").val(clickedCat.imageURL);
+            $("input[name='clicks']").val(clickedCat.clickCounter);
+    },
+
+    adminFormShow: function() {
+
+    },
+
+    adminFormHide: function() {
+
     }
 
 };

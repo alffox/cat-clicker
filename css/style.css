@@ -2,7 +2,21 @@ li {
     cursor: pointer;
 }
 
+button {
+    margin: 10px;
+}
+
 .cat-image {
     max-width: 100%
 }
 
+.cat-dashboard {
+    float: right;
+    padding: 10px;
+}
+
+.cat-list,
+.admin-area {
+    float: left;
+    padding: 10px;
+}

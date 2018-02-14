@@ -4,7 +4,7 @@ var model = {
     cats: [{
             clickCounter: 0,
             name: 'Ashes',
-            imageURL: 'cat1_960x640.jpg',
+            imageURL: 'images/cat1_960x640.jpg',
             authorName: 'Mikhail Vasilyev',
             authorHyperlink: '@miklevasilyev',
             siteName: 'Unsplash',
@@ -13,7 +13,7 @@ var model = {
         {
             clickCounter: 0,
             name: 'Tiger',
-            imageURL: 'cat2_960x640.jpg',
+            imageURL: 'images/cat2_960x640.jpg',
             authorName: 'Paul',
             authorHyperlink: '@paul_',
             siteName: 'Unsplash',
@@ -22,7 +22,7 @@ var model = {
         {
             clickCounter: 0,
             name: 'Lion',
-            imageURL: 'cat3_960x640.jpg',
+            imageURL: 'images/cat3_960x640.jpg',
             authorName: 'Kari Shea',
             authorHyperlink: '@karishea',
             siteName: 'Unsplash',
@@ -31,7 +31,7 @@ var model = {
         {
             clickCounter: 0,
             name: 'Felix',
-            imageURL: 'cat4_960x640.jpg',
+            imageURL: 'images/cat4_960x640.jpg',
             authorName: 'Pacto Visual',
             authorHyperlink: '@pactovisual',
             siteName: 'Unsplash',
@@ -40,7 +40,7 @@ var model = {
         {
             clickCounter: 0,
             name: 'Napoleon',
-            imageURL: 'cat5_960x640.jpg',
+            imageURL: 'images/cat5_960x640.jpg',
             authorName: 'Paul',
             authorHyperlink: '@paul_',
             siteName: 'Unsplash',
@@ -79,6 +79,7 @@ var octopus = {
 
             //Click counter has been updated, now let's render the latest cat data !
             view.renderClickedCatInfo(clickedCat);
+            octopus.setClickedCatData(clickedCat);
         });
     },
 
@@ -86,8 +87,16 @@ var octopus = {
         return clickedCat.clickCounter++;
     },
 
-    setClickedCatData: function() {
-
+    setClickedCatData: function(clickedCat) {
+        $('.save-button').click(function() {
+            clickedCat.name = $("input[name='name']").val();
+            clickedCat.imageURL = $("input[name='imageURL']").val();
+            clickedCat.clickCounter = $("input[name='clicks']").val();
+            view.renderList(clickedCat);
+            view.renderClickedCatInfo(clickedCat);
+            octopus.getClickedCatData();
+            view.adminFormHide();
+        });
     }
 
 };
@@ -108,6 +117,8 @@ var view = {
     },
 
     renderList: function(names) {
+        //Clear previous cat names
+        $(elemCatList).empty();
 
         // On first page load, we want to load only cat names and not full data from the model, this is for scalability and performance reasons. There are high chances that some cats will never be clicked, especially if the list is long
         octopus.getCatNames();
@@ -121,28 +132,34 @@ var view = {
     renderClickedCatInfo: function(clickedCat) {
 
         //Append all info related to clicked cat to DOM
-        $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
+        $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
 
-            //Now that we have a list, let's enable the Admin button !
-            $('.admin-button').prop('disabled', false);
+        //Now that we have a list, let's enable the Admin button !
+        $('.admin-button').prop('disabled', false);
 
+        view.adminFormShow(clickedCat);
+    },
+
+    adminFormShow: function(clickedCat) {
+        $('.admin-button').click(function() {
+            $('.cancel-button, .form, .save-button').toggleClass('hidden');
             view.fillCatForm(clickedCat);
+        });
+        $('.cancel-button').click(function() {
+            view.adminFormHide();
+        });
     },
 
     fillCatForm: function(clickedCat) {
 
-            //Fill form with values from currently selected cat
-            $("input[name='name']").val(clickedCat.name);
-            $("input[name='imageURL']").val(clickedCat.imageURL);
-            $("input[name='clicks']").val(clickedCat.clickCounter);
-    },
-
-    adminFormShow: function() {
-
+        //Fill form with values from currently selected cat
+        $("input[name='name']").val(clickedCat.name);
+        $("input[name='imageURL']").val(clickedCat.imageURL);
+        $("input[name='clicks']").val(clickedCat.clickCounter);
     },
 
     adminFormHide: function() {
-
+        $('.cancel-button, .form, .save-button').toggleClass('hidden');
     }
 
 };

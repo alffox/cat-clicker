@@ -54,6 +54,9 @@ var octopus = {
 
     init: function() {
         view.init();
+
+        //Call this function early to always be ready to listen to clicks
+        octopus.getClickedCatData();
     },
 
     getCatNames: function() {
@@ -87,11 +90,12 @@ var octopus = {
     setClickedCatData: function(clickedCat) {
         $('.save-button').click(function() {
             clickedCat.name = $("input[name='name']").val();
-            view.reRenderList(clickedCat);
             clickedCat.imageURL = $("input[name='imageURL']").val();
             clickedCat.clickCounter = $("input[name='clicks']").val();
-
+            view.renderList(clickedCat);
             view.renderClickedCatInfo(clickedCat);
+            octopus.getClickedCatData();
+            view.adminFormHide();
         });
     }
 
@@ -110,11 +114,9 @@ var view = {
         $('.admin-button').prop('disabled', true);
 
         view.renderList();
-
-        octopus.getClickedCatData();
     },
 
-    renderList: function() {
+    renderList: function(names) {
         //Clear previous cat names
         $(elemCatList).empty();
 
@@ -123,12 +125,8 @@ var view = {
 
         //Make a list from cat names
         for (name = 0; name < catNames.length; name++) {
-            $(elemCatList).append('<li>' + catNames[name] + '</li>');
+            $(elemCatList).append('<li>' + catNames[name] + '</li>');;
         }
-    },
-
-    reRenderList: function(clickedCat) {
-            $('li').eq(0).text(clickedCat.name);
     },
 
     renderClickedCatInfo: function(clickedCat) {
@@ -139,13 +137,20 @@ var view = {
         //Now that we have a list, let's enable the Admin button !
         $('.admin-button').prop('disabled', false);
 
-        view.fillCatForm(clickedCat);
-        view.adminFormHandler();
-        octopus.getClickedCatData();
-        octopus.setClickedCatData(clickedCat);
+        view.adminFormShow(clickedCat);
     },
 
-        fillCatForm: function(clickedCat) {
+    adminFormShow: function(clickedCat) {
+        $('.admin-button').click(function() {
+            $('.cancel-button, .form, .save-button').toggleClass('hidden');
+            view.fillCatForm(clickedCat);
+        });
+        $('.cancel-button').click(function() {
+            view.adminFormHide();
+        });
+    },
+
+    fillCatForm: function(clickedCat) {
 
         //Fill form with values from currently selected cat
         $("input[name='name']").val(clickedCat.name);
@@ -153,13 +158,8 @@ var view = {
         $("input[name='clicks']").val(clickedCat.clickCounter);
     },
 
-    adminFormHandler: function(clickedCat) {
-        $('.admin-button').click(function() {
-            $('.cancel-button, .form, .save-button').toggleClass('hidden');
-        });
-        $('.cancel-button, .save-button').click(function() {
-            $('.cancel-button, .form, .save-button').toggleClass('hidden');
-        });
+    adminFormHide: function() {
+        $('.cancel-button, .form, .save-button').toggleClass('hidden');
     }
 
 };

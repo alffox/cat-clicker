@@ -71,19 +71,42 @@ var octopus = {
             //Assigns index position of clicked cat
             var clickedCatIndexPos = $(e.target).index();
 
+            console.log('1 clickedCatIndexPos is:' + clickedCatIndexPos);
+
             //Casts cat index position with model array position
             var clickedCat = model.cats[clickedCatIndexPos];
+
+            console.log('2 clickedCatIndexPos is:' + clickedCatIndexPos);
 
             //We want each click to increment click counter in the model
             octopus.updateClickCounter(clickedCat);
 
+            console.log('3 clickedCatIndexPos is:' + clickedCatIndexPos);
+
             //Click counter has been updated, now let's render the latest cat data !
             view.renderClickedCatInfo(clickedCat);
+
+            console.log('4 clickedCatIndexPos is:' + clickedCatIndexPos);
+            octopus.setClickedCatData(clickedCat,clickedCatIndexPos);
+            console.log('5 clickedCatIndexPos is:' + clickedCatIndexPos);
         });
     },
 
     updateClickCounter: function(clickedCat) {
         return clickedCat.clickCounter++;
+    },
+
+    setClickedCatData: function(clickedCat,clickedCatIndexPos) {
+        $('.save-button').click(function() {
+            console.log('a clickedCatIndexPos is:' + clickedCatIndexPos);
+            clickedCat.name = $("input[name='name']").val();
+            console.log('b clickedCatIndexPos is:' + clickedCatIndexPos);
+            clickedCat.imageURL = $("input[name='imageURL']").val();
+            clickedCat.clickCounter = $("input[name='clickCounter']").val();
+
+            view.renderClickedCatInfo(clickedCat);
+            view.updateList(clickedCat,clickedCatIndexPos);
+        });
     }
 
 };
@@ -110,10 +133,27 @@ var view = {
         }
     },
 
+    updateList: function(clickedCat, clickedCatIndexPos) {
+        console.log('alpha clickedCatIndexPos is:' + clickedCatIndexPos);
+        $('li').eq(clickedCatIndexPos).text(clickedCat.name);
+    },
+
     renderClickedCatInfo: function(clickedCat) {
 
         //Append all info related to clicked cat to DOM
         $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
+
+        view.fillCatForm(clickedCat);
+    },
+
+    fillCatForm: function(clickedCat) {
+        $('.admin-button').click(function() {
+
+        //Fill form with values from currently selected cat
+        $("input[name='name']").val(clickedCat.name);
+        $("input[name='imageURL']").val(clickedCat.imageURL);
+        $("input[name='clickCounter']").val(clickedCat.clickCounter);
+    });
     }
 
 };

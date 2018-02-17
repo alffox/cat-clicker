@@ -96,6 +96,7 @@ var octopus = {
 
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
+            octopus.getClickedCatData();
         });
     }
 

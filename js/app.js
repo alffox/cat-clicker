@@ -71,24 +71,16 @@ var octopus = {
             //Assigns index position of clicked cat
             var clickedCatIndexPos = $(e.target).index();
 
-            console.log('1 clickedCatIndexPos is:' + clickedCatIndexPos);
-
             //Casts cat index position with model array position
             var clickedCat = model.cats[clickedCatIndexPos];
-
-            console.log('2 clickedCatIndexPos is:' + clickedCatIndexPos);
 
             //We want each click to increment click counter in the model
             octopus.updateClickCounter(clickedCat);
 
-            console.log('3 clickedCatIndexPos is:' + clickedCatIndexPos);
-
             //Click counter has been updated, now let's render the latest cat data !
             view.renderClickedCatInfo(clickedCat);
 
-            console.log('4 clickedCatIndexPos is:' + clickedCatIndexPos);
             octopus.setClickedCatData(clickedCat,clickedCatIndexPos);
-            console.log('5 clickedCatIndexPos is:' + clickedCatIndexPos);
         });
     },
 
@@ -96,16 +88,14 @@ var octopus = {
         return clickedCat.clickCounter++;
     },
 
-    setClickedCatData: function(clickedCat,clickedCatIndexPos) {
+    setClickedCatData: function(clickedCat) {
         $('.save-button').click(function() {
-            console.log('a clickedCatIndexPos is:' + clickedCatIndexPos);
             clickedCat.name = $("input[name='name']").val();
-            console.log('b clickedCatIndexPos is:' + clickedCatIndexPos);
             clickedCat.imageURL = $("input[name='imageURL']").val();
             clickedCat.clickCounter = $("input[name='clickCounter']").val();
 
+            view.renderList();
             view.renderClickedCatInfo(clickedCat);
-            view.updateList(clickedCat,clickedCatIndexPos);
         });
     }
 
@@ -122,7 +112,9 @@ var view = {
         view.renderList();
     },
 
-    renderList: function(names) {
+    renderList: function() {
+
+        $('ul').empty();
 
         // On first page load, we want to load only cat names and not full data from the model, this is for scalability and performance reasons. There are high chances that some cats will never be clicked, especially if the list is long
         octopus.getCatNames();
@@ -131,11 +123,6 @@ var view = {
         for (name = 0; name < catNames.length; name++) {
             $(elemCatList).append('<li>' + catNames[name] + '</li>');;
         }
-    },
-
-    updateList: function(clickedCat, clickedCatIndexPos) {
-        console.log('alpha clickedCatIndexPos is:' + clickedCatIndexPos);
-        $('li').eq(clickedCatIndexPos).text(clickedCat.name);
     },
 
     renderClickedCatInfo: function(clickedCat) {

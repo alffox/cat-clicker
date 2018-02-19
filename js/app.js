@@ -157,21 +157,21 @@ var view = {
         $(elemAdminButton).prop("disabled", false);
 
         view.fillCatForm(clickedCat);
+        octopus.getClickedCatData(clickedCat);
         octopus.setClickedCatData(clickedCat);
     },
 
     fillCatForm: function(clickedCat) {
-        elemAdminButton.click(function() {
+        elemAdminButton.unbind('click').click(function() {
 
             view.hideShowform();
-
-            view.cancelAdmin();
 
             //Fill form with values from currently selected cat
             $(elemInputName).val(clickedCat.name);
             $(elemInputimageURL).val(clickedCat.imageURL);
             $(elemInputclickCounter).val(clickedCat.clickCounter);
 
+            view.cancelAdmin();
         });
     },
 

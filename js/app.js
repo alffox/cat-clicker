@@ -88,12 +88,18 @@ var octopus = {
 
     setClickedCatData: function(clickedCat) {
         $('.save-button').unbind('click').click(function() {
+
+            $('.cancel-button, .form, .save-button').toggleClass('hidden');
+
             clickedCat.name = $("input[name='name']").val();
             clickedCat.imageURL = $("input[name='imageURL']").val();
             clickedCat.clickCounter = $("input[name='clickCounter']").val();
 
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
+
+            $('.admin-button').prop("disabled",true);
+
             octopus.getClickedCatData();
         });
     }
@@ -109,6 +115,8 @@ var view = {
         elemCatList = $('.cat-list');
         elemCatDashboard = $('.cat-dashboard');
         view.renderList();
+
+        $('.admin-button').prop("disabled",true);
     },
 
     renderList: function() {
@@ -129,11 +137,15 @@ var view = {
         //Append all info related to clicked cat to DOM
         $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
 
+        $('.admin-button').prop("disabled",false);
+
         view.fillCatForm(clickedCat);
     },
 
     fillCatForm: function(clickedCat) {
         $('.admin-button').click(function() {
+
+        $('.cancel-button, .form, .save-button').toggleClass('hidden');
 
         //Fill form with values from currently selected cat
         $("input[name='name']").val(clickedCat.name);

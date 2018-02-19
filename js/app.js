@@ -87,20 +87,21 @@ var octopus = {
     },
 
     setClickedCatData: function(clickedCat) {
-        $('.save-button').unbind('click').click(function() {
+        // This is unbunding/binding is necessary to remove previously clicked cat object references
+        $(elemSaveButton).unbind('click').click(function() {
 
-            $('.cancel-button, .form, .save-button').toggleClass('hidden');
+            $(elemHideable).toggleClass('hidden');
 
-            clickedCat.name = $("input[name='name']").val();
-            clickedCat.imageURL = $("input[name='imageURL']").val();
-            clickedCat.clickCounter = $("input[name='clickCounter']").val();
+            clickedCat.name = $(elemInputName).val();
+            clickedCat.imageURL = $(elemInputimageURL).val();
+            clickedCat.clickCounter = $(elemInputclickCounter).val();
 
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
 
-            $('.admin-button').prop("disabled",true);
+            $(elemAdminButton).prop("disabled",true);
 
-            octopus.getClickedCatData();
+            octopus.getClickedCatData(clickedCat);
         });
     }
 
@@ -116,9 +117,19 @@ var view = {
         elemCatDashboard = $('.cat-dashboard');
         elemUl = $('ul');
 
+        elemAdminButton = $('.admin-button');
+        elemSaveButton = $('.save-button');
+
+        elemHideable = $('.hideable');
+
+        elemInputName = $("input[name='name']");
+        elemInputimageURL = $("input[name='imageURL']");
+        elemInputclickCounter = $("input[name='clickCounter']");
+
         view.renderList();
 
-        $('.admin-button').prop("disabled",true);
+        //If there is no cat in the list, it should not be possible to update it
+        elemAdminButton.prop("disabled",true);
     },
 
     renderList: function() {
@@ -139,22 +150,25 @@ var view = {
         //Append all info related to clicked cat to DOM
         $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
 
-        $('.admin-button').prop("disabled",false);
+        //Enable Admin button
+        $(elemAdminButton).prop("disabled",false);
 
         view.fillCatForm(clickedCat);
+        octopus.setClickedCatData(clickedCat);
     },
 
     fillCatForm: function(clickedCat) {
-        $('.admin-button').click(function() {
+        elemAdminButton.click(function() {
 
-        $('.cancel-button, .form, .save-button').toggleClass('hidden');
+        $(elemHideable).toggleClass('hidden');
 
         //Fill form with values from currently selected cat
-        $("input[name='name']").val(clickedCat.name);
-        $("input[name='imageURL']").val(clickedCat.imageURL);
-        $("input[name='clickCounter']").val(clickedCat.clickCounter);
+        $(elemInputName).val(clickedCat.name);
+        $(elemInputimageURL).val(clickedCat.imageURL);
+        $(elemInputclickCounter).val(clickedCat.clickCounter);
 
-        octopus.setClickedCatData(clickedCat);
+        octopus.getClickedCatData(clickedCat);
+
     });
     }
 

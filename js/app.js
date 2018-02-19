@@ -79,8 +79,6 @@ var octopus = {
 
             //Click counter has been updated, now let's render the latest cat data !
             view.renderClickedCatInfo(clickedCat);
-
-            octopus.setClickedCatData(clickedCat,clickedCatIndexPos);
         });
     },
 
@@ -96,7 +94,6 @@ var octopus = {
 
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
-            octopus.getClickedCatData();
         });
     }
 
@@ -135,12 +132,14 @@ var view = {
     },
 
     fillCatForm: function(clickedCat) {
-        $('.admin-button').click(function() {
+        $('.admin-button').unbind('click').click(function() {
 
         //Fill form with values from currently selected cat
         $("input[name='name']").val(clickedCat.name);
         $("input[name='imageURL']").val(clickedCat.imageURL);
         $("input[name='clickCounter']").val(clickedCat.clickCounter);
+
+        octopus.setClickedCatData(clickedCat);
     });
     }
 

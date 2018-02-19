@@ -99,7 +99,7 @@ var octopus = {
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
 
-            $(elemAdminButton).prop("disabled",true);
+            $(elemAdminButton).prop("disabled", true);
 
             octopus.getClickedCatData(clickedCat);
         });
@@ -130,7 +130,7 @@ var view = {
         view.renderList();
 
         //If there is no cat in the list, it should not be possible to update it
-        elemAdminButton.prop("disabled",true);
+        elemAdminButton.prop("disabled", true);
     },
 
     renderList: function() {
@@ -152,7 +152,7 @@ var view = {
         $(elemCatDashboard).empty().append('<div class="cat-info"><div class="click-counter">Clicks: ' + clickedCat.clickCounter + '</div><img class="cat-image" src="images/' + clickedCat.imageURL + '" alt="A cat"><div class="cat-attribution">Photo by <a href="' + clickedCat.siteHyperlink + clickedCat.authorHyperlink + '">' + clickedCat.authorName + '</a> via <a href="' + clickedCat.siteHyperlink + '">' + clickedCat.siteName + '</a></div></div></div>');
 
         //Enable Admin button
-        $(elemAdminButton).prop("disabled",false);
+        $(elemAdminButton).prop("disabled", false);
 
         view.fillCatForm(clickedCat);
         octopus.setClickedCatData(clickedCat);
@@ -161,25 +161,25 @@ var view = {
     fillCatForm: function(clickedCat) {
         elemAdminButton.click(function() {
 
-        view.hideShowform();
+            view.hideShowform();
 
-        view.cancelAdmin();
+            view.cancelAdmin();
 
-        //Fill form with values from currently selected cat
-        $(elemInputName).val(clickedCat.name);
-        $(elemInputimageURL).val(clickedCat.imageURL);
-        $(elemInputclickCounter).val(clickedCat.clickCounter);
+            //Fill form with values from currently selected cat
+            $(elemInputName).val(clickedCat.name);
+            $(elemInputimageURL).val(clickedCat.imageURL);
+            $(elemInputclickCounter).val(clickedCat.clickCounter);
 
-        octopus.getClickedCatData(clickedCat);
+            octopus.getClickedCatData(clickedCat);
 
-    });
+        });
     },
 
     cancelAdmin: function() {
         elemCancelButton.unbind('click').click(function() {
             view.hideShowform();
-               });
-        },
+        });
+    },
 
     hideShowform: function() {
         $(elemHideable).toggleClass('hidden');

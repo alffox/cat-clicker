@@ -87,13 +87,14 @@ var octopus = {
     },
 
     setClickedCatData: function(clickedCat) {
-        $('.save-button').click(function() {
+        $('.save-button').unbind('click').click(function() {
             clickedCat.name = $("input[name='name']").val();
             clickedCat.imageURL = $("input[name='imageURL']").val();
             clickedCat.clickCounter = $("input[name='clickCounter']").val();
 
             view.renderList();
             view.renderClickedCatInfo(clickedCat);
+            octopus.getClickedCatData();
         });
     }
 
@@ -132,7 +133,7 @@ var view = {
     },
 
     fillCatForm: function(clickedCat) {
-        $('.admin-button').unbind('click').click(function() {
+        $('.admin-button').click(function() {
 
         //Fill form with values from currently selected cat
         $("input[name='name']").val(clickedCat.name);

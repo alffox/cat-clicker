@@ -90,7 +90,7 @@ var octopus = {
         // This is unbunding/binding is necessary to remove previously clicked cat object references
         $(elemSaveButton).unbind('click').click(function() {
 
-            $(elemHideable).toggleClass('hidden');
+            view.hideShowform();
 
             clickedCat.name = $(elemInputName).val();
             clickedCat.imageURL = $(elemInputimageURL).val();
@@ -119,6 +119,7 @@ var view = {
 
         elemAdminButton = $('.admin-button');
         elemSaveButton = $('.save-button');
+        elemCancelButton = $('.cancel-button');
 
         elemHideable = $('.hideable');
 
@@ -160,7 +161,9 @@ var view = {
     fillCatForm: function(clickedCat) {
         elemAdminButton.click(function() {
 
-        $(elemHideable).toggleClass('hidden');
+        view.hideShowform();
+
+        view.cancelAdmin();
 
         //Fill form with values from currently selected cat
         $(elemInputName).val(clickedCat.name);
@@ -170,6 +173,16 @@ var view = {
         octopus.getClickedCatData(clickedCat);
 
     });
+    },
+
+    cancelAdmin: function() {
+        elemCancelButton.unbind('click').click(function() {
+            view.hideShowform();
+               });
+        },
+
+    hideShowform: function() {
+        $(elemHideable).toggleClass('hidden');
     }
 
 };

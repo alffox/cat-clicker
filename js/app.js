@@ -55,8 +55,11 @@ var octopus = {
     init: function() {
         view.init();
 
-        //Call this function early to always be ready to listen to clicks
-        octopus.getClickedCatData();
+        // Inializes empty clickedCat variable that will allow using it as empty argument to be filled later upon click on list
+        var clickedCat = null;
+
+        //Called now to always be ready to listen to clicks
+        octopus.getClickedCatData(clickedCat);
     },
 
     getCatNames: function() {
@@ -72,7 +75,7 @@ var octopus = {
             var clickedCatIndexPos = $(e.target).index();
 
             //Casts cat index position with model array position
-            var clickedCat = model.cats[clickedCatIndexPos];
+            clickedCat = model.cats[clickedCatIndexPos];
 
             //We want each click to increment click counter in the model
             octopus.updateClickCounter(clickedCat);
@@ -101,7 +104,6 @@ var octopus = {
 
             $(elemAdminButton).prop("disabled", true);
 
-            octopus.getClickedCatData(clickedCat);
         });
     }
 
@@ -169,8 +171,6 @@ var view = {
             $(elemInputName).val(clickedCat.name);
             $(elemInputimageURL).val(clickedCat.imageURL);
             $(elemInputclickCounter).val(clickedCat.clickCounter);
-
-            octopus.getClickedCatData(clickedCat);
 
         });
     },

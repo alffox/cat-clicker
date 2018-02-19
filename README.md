@@ -12,6 +12,8 @@ The goals of this app are raising the awareness of the developer regarding code 
 
 Simply open the page https://alffox.github.io/cat-clicker/, then click on any cat name in the list to know more info. Upon click, the cat's info and picture will be displayed.
 
+After the first click, the "Admin button" will also be activated. Upon click, this button will show the Admin area. Such area shows the currently clicked cat data and allows updating name, URL (full URL path e.g. http://... is supported) and clicks through the "Save and Refresh" button. Operation can be cancelled with the "Cancel" button.
+
 ## Technical notes
 
 The app was created following the MOV (Model - Octopus - View) pattern, see more info @ https://en.wikipedia.org/wiki/Separation_of_concerns

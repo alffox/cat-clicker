@@ -114,6 +114,8 @@ var view = {
         // Store pointers to DOM elements for easy access later
         elemCatList = $('.cat-list');
         elemCatDashboard = $('.cat-dashboard');
+        elemUl = $('ul');
+
         view.renderList();
 
         $('.admin-button').prop("disabled",true);
@@ -121,7 +123,7 @@ var view = {
 
     renderList: function() {
 
-        $('ul').empty();
+        $(elemUl).empty();
 
         // On first page load, we want to load only cat names and not full data from the model, this is for scalability and performance reasons. There are high chances that some cats will never be clicked, especially if the list is long
         octopus.getCatNames();

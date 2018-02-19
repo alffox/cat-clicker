@@ -66,7 +66,7 @@ var octopus = {
     },
 
     getClickedCatData: function() {
-        $('li').click(function(e) {
+        $(elemUl).click(function(e) {
 
             //Assigns index position of clicked cat
             var clickedCatIndexPos = $(e.target).index();

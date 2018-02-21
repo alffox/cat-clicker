@@ -69,7 +69,7 @@ var octopus = {
     },
 
     getClickedCatData: function() {
-        $(elemUl).unbind('click').click(function(e) {
+        $(elemUl).off('click').click(function(e) {
 
             //Assigns index position of clicked cat
             var clickedCatIndexPos = $(e.target).index();
@@ -91,7 +91,7 @@ var octopus = {
 
     setClickedCatData: function(clickedCat) {
         // This is unbunding/binding is necessary to remove previously clicked cat object references
-        $(elemSaveButton).unbind('click').click(function() {
+        $(elemSaveButton).off('click').click(function() {
 
             view.hideShowform();
 
@@ -162,7 +162,7 @@ var view = {
     },
 
     fillCatForm: function(clickedCat) {
-        elemAdminButton.unbind('click').click(function() {
+        elemAdminButton.off('click').click(function() {
 
             view.hideShowform();
 
@@ -176,7 +176,7 @@ var view = {
     },
 
     cancelAdmin: function() {
-        elemCancelButton.unbind('click').click(function() {
+        elemCancelButton.off('click').click(function() {
             view.hideShowform();
         });
     },

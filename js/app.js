@@ -60,6 +60,7 @@ var octopus = {
 
         //Called now to always be ready to listen to clicks
         octopus.getClickedCatData(clickedCat);
+
     },
 
     getCatNames: function() {
@@ -77,16 +78,16 @@ var octopus = {
             //Casts cat index position with model array position
             clickedCat = model.cats[clickedCatIndexPos];
 
-            //We want each click to increment click counter in the model
-            octopus.updateClickCounter(clickedCat);
-
             //Click counter has been updated, now let's render the latest cat data !
             view.renderClickedCatInfo(clickedCat);
         });
     },
 
-    updateClickCounter: function(clickedCat) {
-        return clickedCat.clickCounter++;
+    updateClickCounter: function(clickCounter) {
+        $(elemImg).click(function() {
+            clickedCat.clickCounter++;
+            view.updateClicks(clickedCat.clickCounter);
+        });
     },
 
     setClickedCatData: function(clickedCat) {
@@ -135,6 +136,12 @@ var view = {
         elemAdminButton.prop("disabled", true);
     },
 
+    //To parse elements that will only appear after the full cat data have been rendered
+    parseNewDOMElements: function() {
+        elemImg = $('img');
+        elemClickCounter = $('.click-counter');
+    },
+
     renderList: function() {
 
         $(elemUl).empty();
@@ -156,9 +163,18 @@ var view = {
         //Enable Admin button
         $(elemAdminButton).prop("disabled", false);
 
+        view.parseNewDOMElements();
+
+        //We want each click to increment click counter in the model
+        octopus.updateClickCounter(clickedCat);
+
         view.fillCatForm(clickedCat);
         octopus.getClickedCatData(clickedCat);
         octopus.setClickedCatData(clickedCat);
+    },
+
+    updateClicks: function(clickCounter) {
+        $(elemClickCounter).text('Clicks: ' + clickedCat.clickCounter);
     },
 
     fillCatForm: function(clickedCat) {
